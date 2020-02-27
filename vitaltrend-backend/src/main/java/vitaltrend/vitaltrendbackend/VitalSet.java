@@ -10,12 +10,12 @@ public class VitalSet {
 	private long diastolic;
 	private long pulse;
 	private long respirations;
-	private long sp02;
+	private long spo2;
 	private double temperature;
 	private Date timeStamp;
 
 	public VitalSet(long id, String username, String patientName, long systolic, long diastolic, long pulse,
-			long respirations, long sp02, double temperature, Date timeStamp) {
+			long respirations, long spo2, double temperature, Date timeStamp) {
 		super();
 		this.id = id;
 		this.username = username;
@@ -24,7 +24,7 @@ public class VitalSet {
 		this.diastolic = diastolic;
 		this.pulse = pulse;
 		this.respirations = respirations;
-		this.sp02 = sp02;
+		this.spo2 = spo2;
 		this.temperature = temperature;
 		this.timeStamp = timeStamp;
 	}
@@ -85,12 +85,12 @@ public class VitalSet {
 		this.respirations = respirations;
 	}
 
-	public long getSp02() {
-		return sp02;
+	public long getSpo2() {
+		return spo2;
 	}
 
-	public void setSp02(long sp02) {
-		this.sp02 = sp02;
+	public void setSpo2(long spo2) {
+		this.spo2 = spo2;
 	}
 
 	public double getTemperature() {
@@ -108,5 +108,29 @@ public class VitalSet {
 	public void setTimeStamp(Date timeStamp) {
 		this.timeStamp = timeStamp;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (int) (id ^ (id >>> 32));
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		VitalSet other = (VitalSet) obj;
+		if (id != other.id)
+			return false;
+		return true;
+	}
+	
+	
 
 }
