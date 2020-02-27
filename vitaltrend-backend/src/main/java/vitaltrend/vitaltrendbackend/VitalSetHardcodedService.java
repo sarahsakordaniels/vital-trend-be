@@ -46,7 +46,7 @@ public class VitalSetHardcodedService {
 	}
 	
 	public VitalSet save(VitalSet vitalset) {
-		if(vitalset.getId()==-1) {
+		if(vitalset.getId()==-1 || vitalset.getId()==0) {
 			vitalset.setId(++idCounter);
 			vitalsets.add(vitalset);
 		} else {
