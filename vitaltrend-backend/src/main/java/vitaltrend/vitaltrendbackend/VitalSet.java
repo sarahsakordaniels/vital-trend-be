@@ -13,6 +13,10 @@ public class VitalSet {
 	private long spo2;
 	private double temperature;
 	private Date timeStamp;
+	
+	public VitalSet() {
+		
+	}
 
 	public VitalSet(long id, String username, String patientName, long systolic, long diastolic, long pulse,
 			long respirations, long spo2, double temperature, Date timeStamp) {

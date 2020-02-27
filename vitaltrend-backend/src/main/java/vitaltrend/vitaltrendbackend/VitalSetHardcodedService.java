@@ -36,13 +36,24 @@ public class VitalSetHardcodedService {
 		return null;
 	}
 
-	private VitalSet findById(long id) {
+	public VitalSet findById(long id) {
 		for(VitalSet vitalset:vitalsets) {
 			if(vitalset.getId() == id) {
 				return vitalset;
 			}
 		}
 		return null;
+	}
+	
+	public VitalSet save(VitalSet vitalset) {
+		if(vitalset.getId()==-1) {
+			vitalset.setId(++idCounter);
+			vitalsets.add(vitalset);
+		} else {
+			deleteById(vitalset.getId());
+			vitalsets.add(vitalset);
+		}
+		return vitalset;
 	}
 
 }

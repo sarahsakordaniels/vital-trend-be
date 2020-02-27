@@ -3,11 +3,14 @@ package vitaltrend.vitaltrendbackend;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -21,6 +24,17 @@ public class VitalsResource {
 	public List<VitalSet> getAllVitalSets(@PathVariable String username){
 		return vitalService.findAll();
 	}
+	
+	@GetMapping("/users/{username}/vitalsets/{id}")
+	public VitalSet getAllVitalSets(@PathVariable String username, @PathVariable long id){
+		return vitalService.findById(id);
+	}
+	
+	@PutMapping("/users/{username}/vitalsets/{id}")
+	public ResponseEntity<VitalSet> updateVitalSet(@PathVariable String username, @PathVariable long id, @RequestBody VitalSet vitalset){
+		VitalSet vitalSetUpdated = vitalService.save(vitalset);
+		return new ResponseEntity<VitalSet>(vitalset, HttpStatus.OK);
+	}
 
 	@DeleteMapping("/users/{username}/vitalsets/{id}")
 	public ResponseEntity<Void> deleteVitalSet(@PathVariable String username, @PathVariable long id){
@@ -28,7 +42,6 @@ public class VitalsResource {
 		if(vitalset != null) {
 			return ResponseEntity.noContent().build();
 		}
-		
 		return ResponseEntity.notFound().build();
 	}
 
