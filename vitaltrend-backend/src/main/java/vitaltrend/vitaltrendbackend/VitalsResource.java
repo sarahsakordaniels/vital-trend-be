@@ -17,41 +17,42 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @RestController
-@CrossOrigin(origins="http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:4200")
 public class VitalsResource {
 	@Autowired
-	private VitalSetHardcodedService  vitalService; 
-	
-	
+	private VitalSetHardcodedService vitalService;
+
 	@GetMapping("/users/{username}/vitalsets")
-	public List<VitalSet> getAllVitalSets(@PathVariable String username){
+	public List<VitalSet> getAllVitalSets(@PathVariable String username) {
 		return vitalService.findAll();
 	}
-	
+
 	@GetMapping("/users/{username}/vitalsets/{id}")
-	public VitalSet getAllVitalSets(@PathVariable String username, @PathVariable long id){
+	public VitalSet getAllVitalSets(@PathVariable String username, @PathVariable long id) {
 		return vitalService.findById(id);
 	}
-	
+
 	@PutMapping("/users/{username}/vitalsets/{id}")
-	public ResponseEntity<VitalSet> updateVitalSet(@PathVariable String username, @PathVariable long id, @RequestBody VitalSet vitalset){
+	public ResponseEntity<VitalSet> updateVitalSet(@PathVariable String username, @PathVariable long id,
+			@RequestBody VitalSet vitalset) {
 		VitalSet vitalSetUpdated = vitalService.save(vitalset);
 		return new ResponseEntity<VitalSet>(vitalset, HttpStatus.OK);
 	}
-	
+
 	@PostMapping("/users/{username}/vitalsets")
-	public ResponseEntity<VitalSet> updateVitalSet(@PathVariable String username, @RequestBody VitalSet vitalset){
+	public ResponseEntity<Void> updateVitalSet(@PathVariable String username, @RequestBody VitalSet vitalset) {
 		VitalSet createdVitalSet = vitalService.save(vitalset);
-		
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(createdVitalSet.getId()).toUri();
-		
+
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(createdVitalSet.getId())
+				.toUri();
+
 		return ResponseEntity.created(uri).build();
 	}
 
 	@DeleteMapping("/users/{username}/vitalsets/{id}")
-	public ResponseEntity<Void> deleteVitalSet(@PathVariable String username, @PathVariable long id){
+	public ResponseEntity<Void> deleteVitalSet(@PathVariable String username, @PathVariable long id) {
 		VitalSet vitalset = vitalService.deleteById(id);
-		if(vitalset != null) {
+		if (vitalset != null) {
 			return ResponseEntity.noContent().build();
 		}
 		return ResponseEntity.notFound().build();

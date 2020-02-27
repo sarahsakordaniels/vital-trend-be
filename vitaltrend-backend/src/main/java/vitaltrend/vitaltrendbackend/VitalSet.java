@@ -12,14 +12,15 @@ public class VitalSet {
 	private long respirations;
 	private long spo2;
 	private double temperature;
-	private Date timeStamp;
+	private String date;
+	private String time;
 	
-	public VitalSet() {
+	protected VitalSet() {
 		
 	}
 
 	public VitalSet(long id, String username, String patientName, long systolic, long diastolic, long pulse,
-			long respirations, long spo2, double temperature, Date timeStamp) {
+			long respirations, long spo2, double temperature, String date, String time) {
 		super();
 		this.id = id;
 		this.username = username;
@@ -30,7 +31,8 @@ public class VitalSet {
 		this.respirations = respirations;
 		this.spo2 = spo2;
 		this.temperature = temperature;
-		this.timeStamp = timeStamp;
+		this.date = date;
+		this.time = time;
 	}
 
 	public long getId() {
@@ -105,12 +107,21 @@ public class VitalSet {
 		this.temperature = temperature;
 	}
 
-	public Date getTimeStamp() {
-		return timeStamp;
+	public String getDate() {
+		return date;
 	}
 
-	public void setTimeStamp(Date timeStamp) {
-		this.timeStamp = timeStamp;
+	public void setDate(String date) {
+		this.date = date;
+	}
+	
+
+	public String getTime() {
+		return time;
+	}
+
+	public void setTime(String time) {
+		this.time = time;
 	}
 
 	@Override

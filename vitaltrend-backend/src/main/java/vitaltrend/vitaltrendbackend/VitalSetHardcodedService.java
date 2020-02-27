@@ -14,11 +14,11 @@ public class VitalSetHardcodedService {
 	
 	static {
 		vitalsets.add(new VitalSet(++idCounter, "sarah", "Bob", 140, 90, 75,
-				16, 95, 37.1, new Date()));
+				16, 95, 37.1, "12/12/12", "14:01"));
 		vitalsets.add(new VitalSet(++idCounter, "Sarah", "Bob", 155, 93, 77,
-				17, 92, 37.5, new Date()));
+				17, 92, 37.5, "12/12/12", "14:01"));
 		vitalsets.add(new VitalSet(++idCounter, "Sarah", "Bob", 133, 88, 56,
-				12, 99, 36.9, new Date()));
+				12, 99, 36.9, "12/12/12", "14:01"));
 	}
 	
 	public List<VitalSet> findAll() {
